@@ -60,7 +60,7 @@ class frete:
 
     def __str__(self):
         return f"Peso (kg) = {self.__p} - Distância (km) = {self.__d}"
-
+    
 class UI:
     @staticmethod
     def main():
