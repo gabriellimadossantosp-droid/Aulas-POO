@@ -55,9 +55,12 @@ class ContatoUI:
     @classmethod
     def listar(cls):
         if len(cls.contatos) == 0:
-            print("Nennhum contato na agenda: ")
+            print("Nenhum contato na agenda: ")
         else:
             for x in cls.contatos:
                 print(x)
+    @classmethod
+    def excluir(cls):
+        if 
         
 ContatoUI.main()
