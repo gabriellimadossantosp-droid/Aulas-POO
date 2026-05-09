@@ -46,7 +46,7 @@ class jogador:
             raise ValueError("O seu id deve ser positivo")
         self.__id = id
 
-    def set_idTime(self, idtime):
+    def set_idtime(self, idtime):
         if idtime < 0:
             raise ValueError("O seu id deve ser positivo")
         self.__idtime = idtime
