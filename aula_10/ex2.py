@@ -108,14 +108,103 @@ class playlistitem:
         return f"Id = {self.__id} - id da playlist = {self.__idplaylist} - Id da música = {self.__idmusica} - Sequência = {self.__sequencia}"
     
 class UI:
-    playlist = []
-    musica = []
+    playlists = []
+    musicas = []
     itens = []
     @staticmethod
     def main():
         op = 0
-        while op != 100:
-            if op == 1: UI.inserir_palylist()
-            if op == 2: UI.inserir_musica()
-            if op == 3: UI.inserir_item()
-            if op == 4: UI.listar_tudo()
+        while op != 11:
+          if op == 1: UI.inserir_musica()
+        if op == 2: UI.listar_musicas()
+        if op == 3: UI.atualizar_musica()
+        if op == 4: UI.excluir_musica()
+        if op == 5: UI.inserir_playlist()
+        if op == 6: UI.listar_playlists()
+        if op == 7: UI.atualizar_playlist()
+        if op == 8: UI.excluir_playlist()
+        if op == 9: UI.inserir_item_playlist()
+        if op == 10: UI.listar_itens_playlist()
+    
+    @staticmethod
+    def menu():
+        print("1 - inserir música, 2 - listar música, 3 - atualizar música, 4 - excluir mússica, 5 - inserir playlist, 6 - listar playlist, 7 - atualizar playlist, 8 - excluir playlist, 9 - listar itens da playlist, 10 - inserir item na playlist")
+        return int(input("Escolha uma opção: "))
+
+    @classmethod
+    def inserir_playlist(cls):
+        id = int(input("ID da Playlist: "))
+        nome = input("Nome: ")
+        desc = input("Descrição: ")
+        cls.playlists.append(playlist(id, nome, desc))
+
+    @classmethod
+    def listar_playlists(cls):
+        for p in cls.playlists: print(p)
+
+    @classmethod
+    def atualizar_playlist(cls):
+        id = int(input("ID da playlist para atualizar: "))
+        for p in cls.playlists:
+            if p.get_id() == id:
+                p.set_nome(input("Novo nome: "))
+                p.set_descricao(input("Nova descrição: "))
+
+    @classmethod
+    def excluir_playlist(cls):
+        id = int(input("ID da playlist para excluir: "))
+        cls.playlists = [p for p in cls.playlists if p.get_id() != id]
+        # Remove também os itens vinculados a essa playlist
+        cls.itens = [i for i in cls.itens if i.get_idplaylist() != id]
+
+    # --- Métodos para Música ---
+    @classmethod
+    def inserir_musica(cls):
+        id = int(input("ID da Música: "))
+        titulo = input("Título: ")
+        artista = input("Artista: ")
+        album = input("Álbum: ")
+        cls.musicas.append(musica(id, titulo, artista, album))
+
+    @classmethod
+    def listar_musicas(cls):
+        print("\n--- Músicas Cadastradas ---")
+        for m in cls.musicas: print(m)
+
+    @classmethod
+    def atualizar_musica(cls):
+        id = int(input("ID da música para atualizar: "))
+        for m in cls.musicas:
+            if m.get_id() == id:
+                m.set_titulo(input("Novo título: "))
+                m.set_artista(input("Novo artista: "))
+                m.set_album(input("Novo álbum: "))
+
+    @classmethod
+    def excluir_musica(cls):
+        id = int(input("ID da música para excluir: "))
+        cls.musicas = [m for m in cls.musicas if m.get_id() != id]
+        cls.itens = [i for i in cls.itens if i.get_idmusica() != id]
+
+
+    @classmethod
+    def inserir_item_playlist(cls):
+        id = int(input("ID do Vínculo (Item ID): "))
+        id_p = int(input("ID da Playlist: "))
+        id_m = int(input("ID da Música: "))
+        seq = int(input("Sequência (Ordem): "))
+        cls.itens.append(playlistitem(id, id_p, id_m, seq))
+
+    @classmethod
+    def listar_itens_playlist(cls):
+        id_p = int(input("ID da Playlist que deseja visualizar: "))
+        print(f"\n--- Músicas da Playlist {id_p} ---")
+        for i in cls.itens:
+            if i.get_idplaylist() == id_p:
+                nome_musica = "Desconhecida"
+                for m in cls.musicas:
+                    if m.get_id() == i.get_idmusica():
+                        nome_musica = m.get_titulo()
+                print(f"Posição {i.get_sequencia()}: {nome_musica} (ID Item: {i.get_id()})")
+
+UI.main()
