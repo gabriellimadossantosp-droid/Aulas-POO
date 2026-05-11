@@ -116,15 +116,15 @@ class UI:
         op = 0
         while op != 11:
           if op == 1: UI.inserir_musica()
-        if op == 2: UI.listar_musicas()
-        if op == 3: UI.atualizar_musica()
-        if op == 4: UI.excluir_musica()
-        if op == 5: UI.inserir_playlist()
-        if op == 6: UI.listar_playlists()
-        if op == 7: UI.atualizar_playlist()
-        if op == 8: UI.excluir_playlist()
-        if op == 9: UI.inserir_item_playlist()
-        if op == 10: UI.listar_itens_playlist()
+          if op == 2: UI.listar_musicas()
+          if op == 3: UI.atualizar_musica()
+          if op == 4: UI.excluir_musica()
+          if op == 5: UI.inserir_playlist()
+          if op == 6: UI.listar_playlists()
+          if op == 7: UI.atualizar_playlist()
+          if op == 8: UI.excluir_playlist()
+          if op == 9: UI.inserir_item_playlist()
+          if op == 10: UI.listar_itens_playlist()
     
     @staticmethod
     def menu():
