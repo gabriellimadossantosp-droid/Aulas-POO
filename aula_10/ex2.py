@@ -111,24 +111,31 @@ class UI:
     playlists = []
     musicas = []
     itens = []
-    @staticmethod
-    def main():
+
+    @classmethod
+    def main(cls):
         op = 0
         while op != 11:
-          if op == 1: UI.inserir_musica()
-          if op == 2: UI.listar_musicas()
-          if op == 3: UI.atualizar_musica()
-          if op == 4: UI.excluir_musica()
-          if op == 5: UI.inserir_playlist()
-          if op == 6: UI.listar_playlists()
-          if op == 7: UI.atualizar_playlist()
-          if op == 8: UI.excluir_playlist()
-          if op == 9: UI.inserir_item_playlist()
-          if op == 10: UI.listar_itens_playlist()
-    
+            op = cls.menu()
+            if op == 1: cls.inserir_playlist()
+            if op == 2: cls.listar_playlists()
+            if op == 3: cls.inserir_musica()
+            if op == 4: cls.listar_musicas()
+            if op == 5: cls.inserir_item_playlist()
+            if op == 6: cls.listar_itens_playlist()
+            if op == 7: cls.atualizar_playlist()
+            if op == 8: cls.excluir_playlist()
+            if op == 9: cls.atualizar_musica()
+            if op == 10: cls.excluir_musica()
+
     @staticmethod
     def menu():
-        print("1 - inserir música, 2 - listar música, 3 - atualizar música, 4 - excluir mússica, 5 - inserir playlist, 6 - listar playlist, 7 - atualizar playlist, 8 - excluir playlist, 9 - listar itens da playlist, 10 - inserir item na playlist")
+        print("1-Inserir Playlist        2-Listar Playlists")
+        print("3-Inserir Música          4-Listar Músicas")
+        print("5-Adicionar Música na PL  6-Ver Músicas de uma PL")
+        print("7-Atualizar Playlist      8-Excluir Playlist")
+        print("9-Atualizar Música        10-Excluir Música")
+        print("11-Sair")
         return int(input("Escolha uma opção: "))
 
     @classmethod
