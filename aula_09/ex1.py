@@ -59,8 +59,3 @@ class ContatoUI:
         else:
             for x in cls.contatos:
                 print(x)
-    @classmethod
-    def excluir(cls):
-        if 
-        
-ContatoUI.main()
