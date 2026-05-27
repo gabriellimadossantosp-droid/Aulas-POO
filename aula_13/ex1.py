@@ -60,11 +60,16 @@ class treinoUI:
         return int(input("Escolha uma opção: "))
     
     @classmethod
-    def inserir():
+    def inserir(cls):
         id = int(input("informe o id: "))
-        data = datetime.strptime(input("informe a data de nascimento: "), "%d/%m/%Y")
+        data = datetime.strptime(input("informe a data do treino: "), "%d/%m/%Y")
         distancia = float(input("informe a distância percorrida: "))
-        tempo = 1 #isso obviamente tá errado, mas aqui já foi, acabei hoje
+        intervalo = input("digite o tempo no formato minutos:segunods: ")
+        m,s = map(int, intervalo.split(":"))
+        tempo = timedelta(minutes=m, seconds=s)
+        x = treino(id, data, distancia,tempo)
+        cls.__treinos.append(x)
 
-
-
+    @classmethod
+    def listar(cls):
+        for x in cls.__treinos: print(x)
