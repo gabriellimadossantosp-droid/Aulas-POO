@@ -18,7 +18,7 @@ c = cliente.from_json({"id" : 3, "nome" : "Allan Turing"})
 lista = [a, b, c]
 
 arquivo = open("clientes.json", mode="w")
-json.dump(lista, arquivo, default = cliente.to_json)
+# json.dump(lista, arquivo, default = cliente.to_json)
 arquivo.close()
 
 print(a)
