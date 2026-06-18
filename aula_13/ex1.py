@@ -64,7 +64,7 @@ class treinoUI:
         id = int(input("informe o id: "))
         data = datetime.strptime(input("informe a data do treino: "), "%d/%m/%Y")
         distancia = float(input("informe a distância percorrida: "))
-        intervalo = input("digite o tempo no formato minutos:segunodos: ")
+        intervalo = input("digite o tempo no formato minutos:segundos: ")
         m,s = map(int, intervalo.split(":"))
         tempo = timedelta(minutes=m, seconds=s)
         x = treino(id, data, distancia,tempo)
