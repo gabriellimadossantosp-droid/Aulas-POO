@@ -40,7 +40,7 @@ class paciente:
         return self.__nascimento
     
     def __str__(self):
-        return f"id: {self.__id} - nome: {self.__nome} - cpf: {self.__cpf} - telefone: {self.__telefone} - nascimento: {self.__nascimento.strftime("%d/%m/%Y")} "
+        return f"id: {self.__id} - nome: {self.__nome} - cpf: {self.__cpf} - telefone: {self.__telefone} - nascimento: {self.__nascimento.strftime('%d/%m/%Y')} "
     def idade(self):
         tempo = datetime.now() - self.__nascimento #resulta em um timedelta
         anos = tempo.days // 365

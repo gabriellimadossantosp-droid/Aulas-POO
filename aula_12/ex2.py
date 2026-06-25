@@ -52,9 +52,9 @@ class boleto:
     def get_situacao_pagamento(self): return self.__situacao_pagamento
 
     def __str__(self):
-        s = f"Boleto: {self.__cod_barras} - Emissão: {self.__data_emissao.strftime("%d/%m/%Y")}"
+        s = f"Boleto: {self.__cod_barras} - Emissão: {self.__data_emissao.strftime('%d/%m/%Y')}"
         s += f"Valor: RS {self.__valor_boleto:.2f} - Valor Pago: RS {self.__valor_pago:.2f}"
-        s += f"Vencimento: {self.__data_emissao.strftime("%d/%m/%Y")}"
+        s += f"Vencimento: {self.__data_emissao.strftime('%d/%m/%Y')}"
         s += f"Data de Pagamento: {self.__data_pagamento}"
         s += f"Situação: {self.__situacao_pagamento}"
         return s
