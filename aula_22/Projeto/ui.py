@@ -1,4 +1,4 @@
-from service import Service
+from aula_22.Projeto.service import Service
 
 class UI:
     @staticmethod
