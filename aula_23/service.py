@@ -4,6 +4,8 @@ from models.servico import Servico
 from models.servicodao import ServicoDAO
 from models.horario import Horario
 from models.horariodao import HorarioDAO
+from models.profissional import Profissional
+from models.profissionaldao import ProfissionalDAO
 
 class Service:
     @staticmethod
@@ -45,11 +47,12 @@ class Service:
 
 
     @staticmethod
-    def horario_inserir(data, confirmado, id_cliente, id_servico):
+    def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(0, data)
         c.set_confirmado(confirmado)
         c.set_id_cliente(id_cliente)
         c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
         HorarioDAO().inserir(c)
     @staticmethod
     def horario_listar():
@@ -58,12 +61,31 @@ class Service:
     def horario_listar_id(id):
         return HorarioDAO().listar_id(id) 
     @staticmethod
-    def horario_atualizar(id, data, confirmado, id_cliente, id_servico):
+    def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
         c = Horario(id, data)
         c.set_confirmado(confirmado)
         c.set_id_cliente(id_cliente)
         c.set_id_servico(id_servico)
+        c.set_id_profissional(id_profissional)
         HorarioDAO().atualizar(c)
     @staticmethod
     def horario_excluir(id):
-        HorarioDAO().excluir(id) 
+        HorarioDAO().excluir(id)
+
+    @staticmethod
+    def profissional_inserir(nome, email, especialidade):
+        obj = Profissional(0, nome, email, especialidade)
+        ProfissionalDAO().inserir(obj)
+    @staticmethod
+    def profissional_listar():
+        return ProfissionalDAO().listar()
+    @staticmethod
+    def profissional_listar_id(id):
+        return ProfissionalDAO().listar_id(id)
+    @staticmethod
+    def profissional_atualizar(id, nome, email, especialidade):
+        obj = Profissional(id, nome, email, especialidade)
+        ProfissionalDAO().atualizar(obj)
+    @staticmethod
+    def profissional_excluir(id):
+        ProfissionalDAO().excluir(id)

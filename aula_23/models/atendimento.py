@@ -47,7 +47,7 @@ class Atendimento:
     def get_id_horario(self): return self.__id_horario
 
     def __str__(self):
-        f"id: {self.__id} - data: {self.__data.strftime('%d/%m/%Y')} - queixa principal: {self.__queixa_principal} - histórico de saúde: {self.__historico_saude} - avaliação: {self.__avaliacao} - prescrição: {self.__prescricao} - id de horário: {self.__id_horario}"
+       return f"id: {self.__id} - data: {self.__data.strftime('%d/%m/%Y')} - queixa principal: {self.__queixa_principal} - histórico de saúde: {self.__historico_saude} - avaliação: {self.__avaliacao} - prescrição: {self.__prescricao} - id de horário: {self.__id_horario}"
 
     def to_json(self):
-        return {"id": self.__id, "data": self.__data.strftime('%d/%m/%Y'), "queixa principal": self.__queixa_principal, "histórico de saúde": self.__historico_saude }
+        return {"id": self.__id, "data": self.__data.strftime('%d/%m/%Y'), "queixa principal": self.__queixa_principal, "histórico de saúde": self.__historico_saude, "avaliação": self.__avaliacao, "prescrição": self.__prescricao, "id de horário": self.__id_horario }
