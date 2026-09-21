@@ -2,6 +2,9 @@ from templates.abrircontaui import AbrirContaUI
 from templates.loginui import LoginUI
 from templates.perfilclienteui import PerfilClienteUI
 from templates.manterclienteui import ManterClienteUI
+from templates.manterprofissionalui import ManterProfissionalUI
+from templates.manterhorarioui import ManterHorarioUI
+from templates.manterservicoui import ManterServicoUI
 from service import Service
 import streamlit as st
 
@@ -24,7 +27,7 @@ class IndexUI:
         if op == "Cadastro de Clientes": ManterClienteUI.main()
         if op == "Cadastro de Serviços": ManterServicoUI.main()
         if op == "Cadastro de Horários": ManterHorarioUI.main()
-        if op == "Cadastro de Profissionais": manterProfissionalUI.main()
+        if op == "Cadastro de Profissionais": ManterProfissionalUI.main()
 
     def sair_do_sistema():
         if st.sidebar.button("Sair"):
