@@ -12,6 +12,6 @@ class PerfilClienteUI:
         if st.button("Atualizar"):
             id = op.get_id()
             Service.cliente_atualizar(id, nome, email, fone, senha)
-            st.sucess("Cliente atualizado com sucesso")
+            st.success("Cliente atualizado com sucesso")
             time.sleep(2)
             st.rerun()

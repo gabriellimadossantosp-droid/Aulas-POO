@@ -25,7 +25,11 @@ class Service:
     @staticmethod
     def cliente_listar_id(id):
         return ClienteDAO().listar_id(id)
-
+    @staticmethod
+    def cliente_criar_admin():
+        for c in Service.cliente_listar():
+            if c.get_email() == "admin": return
+        Service.cliente_inserir("admin", "admin", "fone", "1234")
     def cliente_autenticar(email, senha):
         for c in Service.cliente_listar():
             if c.get_email() == email and c.get_senha() == senha:
@@ -71,6 +75,12 @@ class Service:
     @staticmethod
     def profissional_excluir(id):
         ProfissionalDAO().excluir(id)
+    @staticmethod
+    def profissional_autenticar(email, senha):
+            for c in Service.profissional_listar():
+                if c.get_email() == email and c.get_senha() == senha:
+                    return {"id": c.get_id(), "nome": c.get_nome()}
+            return None
 
 
     @staticmethod
@@ -89,4 +99,20 @@ class Service:
         ServicoDAO().atualizar(obj)
     @staticmethod
     def servico_excluir(id):
+        ServicoDAO().excluir(id)
+
+
+    @staticmethod
+    def atendimento_inserir(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Servico(data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        ServicoDAO().inserir(obj)
+    @staticmethod
+    def atendimento_listar():
+        return ServicoDAO().listar()
+    @staticmethod
+    def atendimento_atualizar(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario):
+        obj = Servico(id, data, queixa_principal, historico_saude, avaliacao, prescricao, id_horario)
+        ServicoDAO().atualizar(obj)
+    @staticmethod
+    def atendimento_excluir(id):
         ServicoDAO().excluir(id)
