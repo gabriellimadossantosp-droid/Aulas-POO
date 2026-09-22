@@ -9,17 +9,19 @@ from service import Service
 import streamlit as st
 
 class IndexUI:
-    def main():
-        op = st.sidebar.selectbox("Menu", ["Clientes", "Convênios"])
-        if op == "Clientes": ManterClienteUI.main()
+
+    def cliente_criar_admin():
+            for c in Service.cliente_listar():
+                if c.get_email() == "admin": return 
+            Service.cliente_inserir("admin", "admin", "fone", "1234")
 
     def menu_visitante():
         op = st.sidebar.selectbox("Menu", ["Entrar no Sistema", "Abrir Conta"])
         if op == "Entrar no Sistema": LoginUI.main()
-        if op == "Abrir conta": AbrirContaUI.main()
+        if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_cliente():
-        op = st.sidebar._selectbox("Menu", ["Meus Dados"])
+        op = st.sidebar.selectbox("Menu", ["Meus Dados"])
         if op == "Meus Dados": PerfilClienteUI.main()
 
     def menu_admin():
@@ -44,5 +46,9 @@ class IndexUI:
             if admin: IndexUI.menu_admin()
             else: IndexUI.menu_cliente()
             IndexUI.sair_do_sistema()
+
+    def main():
+            IndexUI.cliente_criar_admin()
+            IndexUI.sidebar()
 
 IndexUI.main()

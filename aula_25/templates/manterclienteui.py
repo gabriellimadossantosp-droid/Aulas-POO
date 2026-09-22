@@ -44,7 +44,7 @@ class ManterClienteUI:
                 if st.button("Atualizar"):
                     id = op.get_id()
                     Service.cliente_atualizar(id, nome, email, fone, senha)
-                    st.sucess("Cliente atualizado com sucesso")
+                    st.success("Cliente atualizado com sucesso")
 
     def excluir():
          clientes = Service.cliente_listar()
@@ -52,7 +52,7 @@ class ManterClienteUI:
          else:
               op = st.selectbox("Exclusão de Clientes", clientes)
               if st.button("Excluir"):
-                   Service.horario_excluir(op.get_id())
-                   st.success("Horário excluído com sucesso")
+                   Service.cliente_excluir(op.get_id())
+                   st.success("Cliente excluído com sucesso")
                    time.sleep(2)
                    st.rerun()

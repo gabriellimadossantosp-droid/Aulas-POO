@@ -30,6 +30,7 @@ class Cliente:
 
     def __str__(self):
           return f'id: {self.__id} - nome: {self.__nome} - email: {self.__email} - fone: {self.__fone}'
+    #não precisa retornar a senha no to string, pois a senha é um dado ocultado
 
     def to_json(self):
           dic = {"id": self.__id, "nome": self.__nome, "email": self.__email, "fone": self.__fone, "senha": self.__senha}
