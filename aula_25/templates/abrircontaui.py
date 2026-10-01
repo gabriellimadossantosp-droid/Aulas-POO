@@ -13,4 +13,4 @@ class AbrirContaUI:
             Service.cliente_inserir(nome, email, fone, senha)
             st.success("Conta criada com sucesso")
             time.sleep(2)
-            st.rerun
+            st.rerun()
