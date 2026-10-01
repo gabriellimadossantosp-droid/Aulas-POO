@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from models.cliente import Cliente
 from models.clientedao import ClienteDAO
 from models.servico import Servico
@@ -72,6 +73,17 @@ class Service:
         r = HorarioDAO().listar()
         r.sort(key = lambda obj : obj.get_data())
         return r
+    @staticmethod
+    def horario_abrir_minha_agenda(data, horario_inicio, horario_fim, intervalo, id_profissional):
+        data_inicio = datetime.strptime(data + " " + horario_inicio, "%d/%m/%Y %H:%M")
+        data_fim = datetime.strptime(data + " " + horario_fim, "%d/%m/%Y %H:%M")
+        delta = timedelta(minutes = intervalo)
+        x = data_inicio
+        while x <= data_fim:
+            #inserir um horário
+            Service.horario_inserir(x, False, None, None, id_profissional)
+            x = x + delta
+
     @staticmethod
     def horario_listar_id(id):
         return HorarioDAO().listar_id(id)
