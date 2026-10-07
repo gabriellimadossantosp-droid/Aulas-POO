@@ -9,6 +9,9 @@ from templates.perfilclienteui import PerfilClienteUI
 from templates.perfilprofissionalui import PerfilProfissionalUI
 from templates.agendarservicoui import AgendarServicoUI
 from templates.abrirminhaagendaui import AbrirMinhaAgendaUI
+from templates.visualizarmeusservicosui import VisualizarMeusServicosUI
+from templates.visualizarminhaagendaui import VisualizarMinhaAgendaUI
+from templates.confirmarsevicoui import ConfirmarServicoUI
 
 from service import Service
 import streamlit as st
@@ -21,14 +24,17 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
 
     def menu_cliente():
-        op = st.sidebar.selectbox("Menu", ["Meus Dados", "Agendar Serviço"])
+        op = st.sidebar.selectbox("Menu", ["Meus Dados", "Agendar Serviço", "Meus Serviços"])
         if op == "Meus Dados": PerfilClienteUI.main()
         if op == "Agendar Serviço": AgendarServicoUI.main()
+        if op == "Meus Serviços": VisualizarMeusServicosUI.main()
 
     def menu_profissional():
-        op = st.sidebar.selectbox("Menu", ["Meus Dados", "Abrir Minha Agenda"])
+        op = st.sidebar.selectbox("Menu", ["Meus Dados", "Abrir Minha Agenda", "Minha Agenda", "Confirmar Serviço"])
         if op == "Meus Dados": PerfilProfissionalUI.main()
         if op == "Abrir Minha Agenda": AbrirMinhaAgendaUI.main()
+        if op == "Minha Agenda": VisualizarMinhaAgendaUI.main()
+        if op == "Confirmar Serviço": ConfirmarServicoUI.main()
 
     def menu_admin():
         op = st.sidebar.selectbox("Menu", ["Clientes", "Serviços", "Horários", "Profissionais", "Atendimentos"])
@@ -51,7 +57,7 @@ class IndexUI:
             admin = st.session_state["usuario_nome"] == "admin"
             st.sidebar.write("Bem-vindo(a), " + st.session_state["usuario_nome"])
             if admin: IndexUI.menu_admin()
-            else:
+            else: 
                 if st.session_state["usuario_tipo"] == "cliente": IndexUI.menu_cliente()
                 else: IndexUI.menu_profissional()
             IndexUI.sair_do_sistema()
