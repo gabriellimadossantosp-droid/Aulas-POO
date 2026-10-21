@@ -7,7 +7,7 @@ from datetime import datetime
 class ConfirmarServicoUI:
     def main():
         st.header("Confirmar Serviço")
-        horarios = Service.horario_confirmar_servico(st.session_state["usuario_id"])
+        horarios = Service.profissional_visualizar_minha_agenda(st.session_state["usuario_id"])
         if len(horarios) == 0: st.write("Nenhum horário cadastrado")
         else:
             clientes = Service.cliente_listar()

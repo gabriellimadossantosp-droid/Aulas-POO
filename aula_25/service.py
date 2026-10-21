@@ -33,7 +33,7 @@ class Service:
     def cliente_excluir(id):
         ClienteDAO().excluir(id)
     @staticmethod
-    def cliente_visualizar_servicos(id_cliente):
+    def cliente_visualizar_meus_servicos(id_cliente):
         h = []
         horarios = Service.horario_listar()
         for obj in horarios:
@@ -132,7 +132,7 @@ class Service:
         ProfissionalDAO().excluir(id)
     
     @staticmethod
-    def profissional_visualizar_agenda(id_profissional):
+    def profissional_visualizar_minha_agenda(id_profissional):
         h = []
         horarios = Service.horario_listar()
         for obj in horarios:
@@ -165,6 +165,24 @@ class Service:
     @staticmethod
     def atendimento_excluir(id):
         AtendimentoDAO().excluir(id)
+    @staticmethod
+    def total_atendimentos():
+        r = ProfissionalDAO().listar()
+        r.sort(key = lambda obj : obj.get_nome().casefold())
+        dic = {}
+        for obj in r:
+            dic[obj.get_id()] = 0
+        horarios = HorarioDAO().listar()
+        for h in horarios:
+            if h.get_confirmado(): dic[h.get_id_profissional()] = dic[h.get_id_profissional()] + 1
+        list_prof = []
+        for key, value in dic.items():
+            prof = {}
+            prof["ID"] = key
+            prof["Nome"] = Service.profissional_listar_id(key).get_nome()
+            prof["Quantidade de Atendimentos"] = value
+            list_prof.append(prof)
+        return list_prof
 
     @staticmethod
     def atendimentoitem_inserir(id_atendimento, id_servico, qtd, valor):

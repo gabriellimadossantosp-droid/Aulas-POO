@@ -6,7 +6,7 @@ from datetime import datetime
 class RegistrarAtendimentoUI:
     def main():
         st.header("Registrar Atendimento")
-        horarios = Service.profissional_visualizar_agenda(st.session_state["usuario_id"])
+        horarios = Service.profissional_visualizar_minha_agenda(st.session_state["usuario_id"])
         atendimentos = Service.atendimento_listar()
         horarios_filtrados = []
         for h in horarios:

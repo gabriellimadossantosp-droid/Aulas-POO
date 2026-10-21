@@ -15,18 +15,20 @@ from templates.confirmarsevicoui import ConfirmarServicoUI
 from templates.admalterarsenhaui import ADMAlterarSenhaUI
 from templates.registraratendimentoui import RegistrarAtendimentoUI
 from templates.pagaratendimentoui import PagarAtendimentoUI
+from templates.totalatendimentosui import TotalAtendimentosUI
 from service import Service
 import streamlit as st
 
 class IndexUI:
     def menu_admin():
-        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos", "Alterar senha"])
+        op = st.sidebar.selectbox("Menu", ["Cadastro de Clientes", "Cadastro de Serviços", "Cadastro de Horários", "Cadastro de Profissionais", "Cadastro de Atendimentos", "Alterar senha", "Total de Atendimentos"])
         if op == "Cadastro de Clientes": ManterClienteUI.main()
         if op == "Cadastro de Serviços": ManterServicoUI.main()
         if op == "Cadastro de Horários": ManterHorarioUI.main()
         if op == "Cadastro de Profissionais": ManterProfissionalUI.main()
         if op == "Cadastro de Atendimentos": ManterAtendimentoUI.main()
         if op == "Alterar senha": ADMAlterarSenhaUI.main()
+        if op == "Total de Atendimentos": TotalAtendimentosUI.main()
     def sidebar():
         if "usuario_id" not in st.session_state:
             IndexUI.menu_visitante()
@@ -47,15 +49,15 @@ class IndexUI:
         if op == "Abrir Conta": AbrirContaUI.main()
     def menu_cliente():
         op = st.sidebar.selectbox("Menu", ["Meus Dados", "Agendar Serviço", "Meus Serviços", "Pagar Atendimento"])
-        if op == "Meus Dados": PerfilClienteUI.cliente_main()
+        if op == "Meus Dados": PerfilClienteUI.main()
         if op == "Agendar Serviço": AgendarServicoUI.main()
-        if op == "Meus Serviços": VisualizarServicosUI.main()
+        if op == "Meus Serviços": VisualizarMeusServicosUI.main()
         if op == "Pagar Atendimento": PagarAtendimentoUI.main()
     def menu_profissional():
         op = st.sidebar.selectbox("Menu", ["Meus Dados", "Abrir Agenda", "Minha Agenda", "Confirmar Serviço", "Registrar Atendimento"])
-        if op == "Meus Dados": PerfilProfissionalUI.profissional_main()
-        if op == "Abrir Agenda": AbrirAgendaUI.main()
-        if op == "Minha Agenda": VisualizarAgendaUI.main()
+        if op == "Meus Dados": PerfilProfissionalUI.main()
+        if op == "Abrir Agenda": AbrirMinhaAgendaUI.main()
+        if op == "Minha Agenda": VisualizarMinhaAgendaUI.main()
         if op == "Confirmar Serviço": ConfirmarServicoUI.main()
         if op == "Registrar Atendimento": RegistrarAtendimentoUI.main()
     def sair_do_sistema():
