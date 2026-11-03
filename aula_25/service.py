@@ -30,8 +30,11 @@ class Service:
         return ClienteDAO().listar_id(id)
     @staticmethod
     def cliente_atualizar(id, nome, email, fone, senha):
-        obj = Cliente(id, nome, email, fone, senha)
-        ClienteDAO().atualizar(obj)
+        for obj in Service.cliente_listar():
+            if obj.get_id() != id and (obj.get_email() == email or obj.get_email() == "admin"):
+                raise ValueError("Não podem haver E-mails iguais, tente outro")
+        c = Cliente(id, nome, email, fone, senha)
+        ClienteDAO().atualizar(c)
     @staticmethod
     def cliente_excluir(id):
         for obj in Service.horario_listar():
@@ -130,8 +133,11 @@ class Service:
 
     @staticmethod
     def profissional_inserir(nome, email, especialidade, senha):
-        obj = Profissional(0, nome, email, especialidade, senha)
-        ProfissionalDAO().inserir(obj)
+        for obj in Service.profissional_listar():
+            if obj.get_email() == email or obj.get_email() == "admin":
+                raise ValueError("Não podem haver 2 email iguais, tente outro")
+        c = Profissional(0, nome, email, especialidade, senha)
+        ProfissionalDAO().inserir(c)
     @staticmethod
     def profissional_listar():
         r = ProfissionalDAO().listar()
@@ -142,11 +148,18 @@ class Service:
         return ProfissionalDAO().listar_id(id)
     @staticmethod
     def profissional_atualizar(id, nome, email, especialidade, senha):
-        obj = Profissional(id, nome, email, especialidade, senha)
-        ProfissionalDAO().atualizar(obj)
+        for obj in Service.servico_listar():
+            if obj.get_id() != id and obj.get_email() == email:
+                raise ValueError("Já há um profissional com esse email")
+        c = Profissional(id, nome, email, especialidade, senha)
+        ProfissionalDAO().atualizar(c)
     @staticmethod
     def profissional_excluir(id):
-        ProfissionalDAO().excluir(id)
+        for obj in Service.horario_listar():
+            if obj.get_id_profissional() == id:
+                raise ValueError("Profissional já está em um serviço: não é possível excluir")
+        c = Profissional(id, "sem nome", "sem email", "sem especialidade", "sem senha")
+        ProfissionalDAO().excluir(c)
     
     @staticmethod
     def profissional_visualizar_minha_agenda(id_profissional):

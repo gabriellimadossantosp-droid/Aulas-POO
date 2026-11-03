@@ -240,7 +240,7 @@ class Service:
         hoje = datetime.now().date()
         for obj in Service.horario_listar():
             data = obj.get_data()
-            if isinstance(dt, str):
+            if isinstance(data, str):
                 data = datetime.fromisoformat(data)
             if obj.get_confirmado() == True and obj.get_id_cliente() != None and data.date() == hoje:
                 horarios.append(obj)
