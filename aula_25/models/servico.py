@@ -8,10 +8,10 @@ class Servico:
         if id < 0: raise ValueError("Id deve ser positivo")
         self.__id = id
     def set_descricao(self, descricao):
-        if descricao == "": raise ValueError("Descrição deve ser informada")
+        if descricao == "": raise ValueError("Descrição inválida")
         self.__descricao = descricao
     def set_valor(self, valor):
-        if valor < 0: raise ValueError("Valor deve ser positivo")
+        if valor <= 0: raise ValueError("Valor inválido")
         self.__valor = valor
 
     def get_id(self): return self.__id
