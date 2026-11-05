@@ -18,6 +18,9 @@ class Service:
         for obj in Service.cliente_listar():
             if obj.get_email() == email or obj.get_email() == "admin":
                 raise ValueError("Não podem haver E-mails iguais, tente outro")
+        for obj in Service.profissional_listar():
+            if obj.get_email() == email:
+                raise ValueError("Esse email já pertence a um profissional")
         c = Cliente(0, nome, email, fone, senha)
         ClienteDAO().inserir(c)
     @staticmethod
@@ -33,6 +36,9 @@ class Service:
         for obj in Service.cliente_listar():
             if obj.get_id() != id and (obj.get_email() == email or obj.get_email() == "admin"):
                 raise ValueError("Não podem haver E-mails iguais, tente outro")
+        for obj in Service.profissional_listar():
+            if obj.get_id() != id and obj.get_email() == email:
+                raise ValueError("Esse email já pertence a um profissional")
         c = Cliente(id, nome, email, fone, senha)
         ClienteDAO().atualizar(c)
     @staticmethod
@@ -83,6 +89,9 @@ class Service:
 
     @staticmethod
     def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
+        for obj in Service.horario_listar():
+            if obj.get_id_profissional() == id_profissional and obj.get_data() == data:
+                raise ValueError("O profissional já possui um horário cadastrado")
         obj = Horario(0, data)
         obj.set_confirmado(confirmado)
         obj.set_id_cliente(id_cliente)
@@ -99,6 +108,9 @@ class Service:
         return HorarioDAO().listar_id(id)
     @staticmethod
     def horario_atualizar(id, data, confirmado, id_cliente, id_servico, id_profissional):
+        for obj in Service.horario_listar():
+            if obj.get_id() != id and obj.get_id_profissional() == id_profissional and obj.get_data() == data:
+                raise ValueError("O profissional possui outro horário cadastrado")
         obj = Horario(id, data)
         obj.set_confirmado(confirmado)
         obj.set_id_cliente(id_cliente)
@@ -107,6 +119,9 @@ class Service:
         HorarioDAO().atualizar(obj)
     @staticmethod
     def horario_excluir(id):
+        for obj in Service.horario_listar():
+            if obj.get_id() == id and obj.get_id_cliente():
+                raise ValueError("Horário já agendado por um cliente: não é possível excluir")
         HorarioDAO().excluir(id)
 
     @staticmethod
@@ -136,6 +151,9 @@ class Service:
         for obj in Service.profissional_listar():
             if obj.get_email() == email or obj.get_email() == "admin":
                 raise ValueError("Não podem haver 2 email iguais, tente outro")
+        for obj in Service.cliente_listar():
+            if obj.get_email() == email:
+                raise ValueError("Esse email já foi cadastrado por um cliente")
         c = Profissional(0, nome, email, especialidade, senha)
         ProfissionalDAO().inserir(c)
     @staticmethod
@@ -148,9 +166,12 @@ class Service:
         return ProfissionalDAO().listar_id(id)
     @staticmethod
     def profissional_atualizar(id, nome, email, especialidade, senha):
-        for obj in Service.servico_listar():
+        for obj in Service.profissional_listar():
+            if obj.get_id() != id and (obj.get_email() == email or obj.get_email() == "admin"):
+                raise ValueError("Esse email já existe, tente outro")
+        for obj in Service.cliente_listar():
             if obj.get_id() != id and obj.get_email() == email:
-                raise ValueError("Já há um profissional com esse email")
+                raise ValueError("Esse email já pertence a um profissional")
         c = Profissional(id, nome, email, especialidade, senha)
         ProfissionalDAO().atualizar(c)
     @staticmethod

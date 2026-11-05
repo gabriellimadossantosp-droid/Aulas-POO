@@ -27,8 +27,11 @@ class ManterClienteUI:
             fone = st.text_input("Informe o fone")
             senha = st.text_input("Informe a senha", type="password")
             if st.button("Inserir"):
-                Service.cliente_inserir(nome, email, fone, senha)
-                st.success("Cliente inserido com sucesso")
+                try:
+                    Service.cliente_inserir(nome, email, fone, senha)
+                    st.success("Cliente inserido com sucesso")
+                except ValueError as erro:
+                    st.error(erro)
                 time.sleep(2)
                 st.rerun()
 
@@ -42,17 +45,26 @@ class ManterClienteUI:
                 fone = st.text_input("Novo fone", op.get_fone())
                 senha = st.text_input("Nova senha", op.get_senha())
                 if st.button("Atualizar"):
-                    id = op.get_id()
-                    Service.cliente_atualizar(id, nome, email, fone, senha)
-                    st.success("Cliente atualizado com sucesso")
+                    try:
+                        id = op.get_id()
+                        Service.cliente_atualizar(id, nome, email, fone, senha)
+                        st.success("Cliente atualizado com sucesso")
+                    except ValueError as erro:
+                        st.error(erro)
+                    time.sleep(2)
+                    st.rerun()
 
     def excluir():
-         clientes = Service.cliente_listar()
-         if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
-         else:
-              op = st.selectbox("Exclusão de Clientes", clientes)
-              if st.button("Excluir"):
-                   Service.cliente_excluir(op.get_id())
-                   st.success("Cliente excluído com sucesso")
-                   time.sleep(2)
-                   st.rerun()
+        clientes = Service.cliente_listar()
+        if len(clientes) == 0: st.write("Nenhum cliente cadastrado")
+        else:
+            op = st.selectbox("Exclusão de Clientes", clientes)
+            if st.button("Excluir"):
+                try:
+                    id = op.get_id()
+                    Service.cliente_excluir(id)
+                    st.success("Cliente excluído com sucesso")
+                except ValueError as erro:
+                    st.error(erro)
+                time.sleep(2)
+                st.rerun()
