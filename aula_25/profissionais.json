@@ -12,5 +12,12 @@
     "email": "dudu@gmail.com",
     "especialidade": "M\u00e9dico cardiologista",
     "senha": "dudu123"
+  },
+  {
+    "id": 3,
+    "nome": "Fabr\u00edcio",
+    "email": "yfabricios@gmail.com",
+    "especialidade": "Programador",
+    "senha": "yfabricios"
   }
 ]

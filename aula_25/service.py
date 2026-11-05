@@ -46,8 +46,7 @@ class Service:
         for obj in Service.horario_listar():
             if obj.get_id_cliente() == id:
                 raise ValueError("Cliente tem um serviço agendado: não é possível excluir")
-        c = Cliente(id, "sem email", "sem fone", "sem senha")
-        ClienteDAO().excluir(c)
+        ClienteDAO().excluir(id)
     @staticmethod
     def cliente_visualizar_meus_servicos(id_cliente):
         h = []
@@ -84,8 +83,7 @@ class Service:
         for obj in Service.horario_listar():
             if obj.get_id_servico() == id:
                 raise ValueError("Serviço já agendado: não é possível excluir")
-        c = Servico(id, "sem descricao", 0)
-        ServicoDAO().excluir(c)
+        ServicoDAO().excluir(id)
 
     @staticmethod
     def horario_inserir(data, confirmado, id_cliente, id_servico, id_profissional):
@@ -179,8 +177,7 @@ class Service:
         for obj in Service.horario_listar():
             if obj.get_id_profissional() == id:
                 raise ValueError("Profissional já está em um serviço: não é possível excluir")
-        c = Profissional(id, "sem nome", "sem email", "sem especialidade", "sem senha")
-        ProfissionalDAO().excluir(c)
+        ProfissionalDAO().excluir(id)
     
     @staticmethod
     def profissional_visualizar_minha_agenda(id_profissional):
