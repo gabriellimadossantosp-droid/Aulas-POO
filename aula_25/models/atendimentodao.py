@@ -1,44 +1,12 @@
 from models.atendimento import Atendimento
+from models.dao import DAO
 import json
 
-class AtendimentoDAO:
+class AtendimentoDAO(DAO):
     def __init__(self):
-        self._arquivo = "atendimentos.json"
-        self._objetos = []
-        self.__abrir()
+        super().__init__("atendimentos.json")
 
-    def inserir(self, obj):
-        # gerar um novo id com o maior valor existente mais um
-        id = 0
-        if len(self._objetos) > 0:
-            for aux in self._objetos:
-                if aux.get_id() > id: id = aux.get_id()
-        obj.set_id(id + 1)
-        self._objetos.append(obj)
-        self.__salvar()
-
-    def listar(self):                
-        return self._objetos
-
-    def listar_id(self, id):
-        for obj in self._objetos:
-            if obj.get_id() == id: return obj
-        return None
-
-    def atualizar(self, obj):
-        aux = self.listar_id(obj.get_id())
-        if aux != None:
-            self._objetos.remove(aux)
-            self._objetos.append(obj)
-            self.__salvar()
-
-    def excluir(self, id):
-        aux = self.listar_id(id)
-        if aux != None:
-            self._objetos.remove(aux)
-            self.__salvar()
-
-    def __abrir(self):  
+    def _abrir(self):  
         try:  
             arquivo = open(self._arquivo, mode = "r")
             list_dic = json.load(arquivo)
@@ -50,7 +18,7 @@ class AtendimentoDAO:
         except FileNotFoundError:
             pass
 
-    def __salvar(self):    
+    def _salvar(self):    
         arquivo = open(self._arquivo, mode = "w")
         json.dump(self._objetos, arquivo, default = Atendimento.to_json, indent = 2)
         arquivo.close()
