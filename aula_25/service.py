@@ -1,13 +1,13 @@
 from models.cliente import Cliente         # entidade
-from models.clientedao import ClienteDAO   # persistência
+from dao_sql.clientedao import ClienteDAO   # persistência
 from models.servico import Servico
-from models.servicodao import ServicoDAO
+from dao_sql.servicodao import ServicoDAO
 from models.horario import Horario
-from models.horariodao import HorarioDAO
+from dao_sql.horariodao import HorarioDAO
 from models.profissional import Profissional
-from models.profissionaldao import ProfissionalDAO
+from dao_sql.profissionaldao import ProfissionalDAO
 from models.atendimento import Atendimento
-from models.atendimentodao import AtendimentoDAO
+from dao_sql.atendimentodao import AtendimentoDAO
 from models.atendimentoitens import AtendimentoItens
 from models.atendimentoitensdao import AtendimentoItensDAO
 from datetime import datetime, timedelta
@@ -16,7 +16,7 @@ class Service:
     @staticmethod
     def cliente_inserir(nome, email, fone, senha):
         for obj in Service.cliente_listar():
-            if obj.get_email() == email or obj.get_email() == "admin":
+            if obj.get_email() == email or email == "admin":
                 raise ValueError("Não podem haver E-mails iguais, tente outro")
         for obj in Service.profissional_listar():
             if obj.get_email() == email:
@@ -147,7 +147,7 @@ class Service:
     @staticmethod
     def profissional_inserir(nome, email, especialidade, senha):
         for obj in Service.profissional_listar():
-            if obj.get_email() == email or obj.get_email() == "admin":
+            if obj.get_email() == email or email == "admin":
                 raise ValueError("Não podem haver 2 email iguais, tente outro")
         for obj in Service.cliente_listar():
             if obj.get_email() == email:
