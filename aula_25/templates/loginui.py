@@ -4,8 +4,8 @@ from service import Service
 class LoginUI:
     def main():
         st.header("Entrar no Sistema")
-        email = st.text_input("Informe o e-mail")
-        senha = st.text_input("Informe a senha", type="password")
+        email = st.text_input("E-mail: ", placeholder="digite seu email")
+        senha = st.text_input("Senha: ", type="password", placeholder="digite sua senha")
         if st.button("Entrar"):
             c = Service.cliente_autenticar(email, senha)
             if c != None:

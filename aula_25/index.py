@@ -44,7 +44,7 @@ class IndexUI:
         Service.cliente_criar_admin()
         IndexUI.sidebar()
     def menu_visitante():
-        op = st.sidebar.selectbox("Menu", ["Entrar no Sistema","Abrir Conta"])
+        op = st.sidebar.selectbox("Menu", ["Entrar no Sistema","Abrir Conta"], index=None)
         if op == "Entrar no Sistema": LoginUI.main()
         if op == "Abrir Conta": AbrirContaUI.main()
     def menu_cliente():
